@@ -12,7 +12,15 @@
      service: 
         name: docker
         state: started
+     notify: enable docker
         
    - name: clone the repo 
      git:
-        repo: 
+        repo: https://github.com/Ram2305/E-commerce_application_deployment.git
+        dest: /ec2-user
+        
+  handlers:
+    - name: enable docker 
+      service:
+         name: docker
+         state: enable 
