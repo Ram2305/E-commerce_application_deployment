@@ -23,4 +23,4 @@
     - name: enable docker 
       service:
          name: docker
-         state: enable 
+         enabled: yes
