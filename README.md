@@ -14,7 +14,7 @@ Website:
 ![output](https://user-images.githubusercontent.com/54402312/185157546-e6802853-55f5-4c2e-bbd0-026cdf883e3f.png)
 
 
-Kubernetes Cluster Monitoring
+Kubernetes Cluster Monitoring :
 
 ![k8smonitoring](https://user-images.githubusercontent.com/54402312/185158768-a5aeb1a0-a515-460d-a643-526783b14802.png)
 
