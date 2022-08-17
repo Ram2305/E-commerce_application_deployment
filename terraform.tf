@@ -17,4 +17,4 @@ variable "x"{
     default = ["t2.medium","t2.medium","t2.micro","t2.micro"]
 }
 
-#infrasture code details or mentioned in the file for security purpose but structure of the code remains the same.
+#infrasture code details are not mentioned in the file for security purpose but structure of the code remains the same.
