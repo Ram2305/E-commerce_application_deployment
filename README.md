@@ -16,4 +16,5 @@ Website:
 
 Kubernetes Cluster Monitoring
 
-![image](https://user-images.githubusercontent.com/54402312/185158305-7be2a547-d8c0-478e-8408-e526f21736a1.png)
+![k8smonitoring](https://user-images.githubusercontent.com/54402312/185158768-a5aeb1a0-a515-460d-a643-526783b14802.png)
+
