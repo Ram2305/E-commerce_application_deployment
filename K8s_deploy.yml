@@ -1,0 +1,106 @@
+apiVersion: v1
+kind: PersistentVolume #pv creation (storage admin end)
+metadata:
+  name: storage-admin-pv
+  labels:
+    tag: webapp-pv
+spec:
+  storageClassName: manual #manully pv is created
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /tmp/pv_data
+
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim #pv claim (k8s devloper end)
+metadata:
+ name: webapp-pvc
+spec:
+ storageClassName: manual
+ accessModes:
+  - ReadWriteOnce
+ resources:
+  requests:
+   storage: 1Gi
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+  labels:
+    tag: shopping-app
+spec: # replicaset specs
+  replicas: 3
+
+
+  minReadySeconds: 10 #wait for 10 sec before going to deploy next pod
+  strategy: 
+   type: RollingUpdate #comes into action only when the image/version of the application has to be updated without any downtime
+   rollingUpdate:
+    maxUnavailable: 1 #maximum 1 older version of pod will be deleted at a time before new pods get added to the cluster 
+    maxSurge: 1  #maximum 1 extra pods that are allowed to  have in the cluster
+
+
+  selector: #condition that checks if pods already exists with tag=shopping-app
+    matchLabels:
+      tag: shopping-app
+
+
+
+
+  template: #template for pods 
+    metadata:
+      name: webapp-pods
+      labels:
+        tag: shopping-app
+    spec: #pod specs
+      containers:
+        - name: my-container
+          image: ram2305/private:shopping_website
+          volumeMounts:
+            - name: storage-admin-pv #name of the volume available
+              mountPath: /usr/local/apache2/pv_data #container path
+      
+      volumes:
+        - name: storage-admin-pv #volume name should be mentioned
+          persistentVolumeClaim:
+           claimName: webapp-pvc
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shopping-app-service
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80 # service port
+      targetPort: 80 # container port 
+﻿
+  selector:
+   tag: shopping-app  #select only the pods with label as shopping-app
+
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: webapp-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: webapp-deployment
+
+
+  minReplicas: 3
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 10
