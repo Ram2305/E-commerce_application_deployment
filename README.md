@@ -20,4 +20,5 @@ Kubernetes Cluster Monitoring :
 
 
 Project Outline :
+
 ![Screenshot_2022-08-19_144957-removebg-preview (1)-removebg-preview](https://user-images.githubusercontent.com/54402312/185593648-05ed5774-fe33-4d92-bcce-25b004c8485a.jpg)
