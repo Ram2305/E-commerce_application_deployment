@@ -18,3 +18,6 @@ Kubernetes Cluster Monitoring :
 
 ![k8smonitoring](https://user-images.githubusercontent.com/54402312/185158768-a5aeb1a0-a515-460d-a643-526783b14802.png)
 
+
+Project Outline :
+![Screenshot_2022-08-19_144957-removebg-preview (1)-removebg-preview](https://user-images.githubusercontent.com/54402312/185593648-05ed5774-fe33-4d92-bcce-25b004c8485a.jpg)
